@@ -11,10 +11,10 @@
  Target Server Version : 80034
  File Encoding         : 65001
 
- Date: 30/07/2024 16:01:59
+ Date: 30/07/2024 16:05:04
 */
 
-SET NAMES latin1;
+SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
@@ -23,12 +23,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `mt_anggota`;
 CREATE TABLE `mt_anggota`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `no_anggota` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `nama` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `nik` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `no_hp` varchar(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `alamat` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `no_anggota` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `nik` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `no_hp` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `alamat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `status` int(0) NULL DEFAULT 0,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `created_by` int(0) NULL DEFAULT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `mt_anggota`  (
   `jenis_kelamin` int(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `no_anggota`(`no_anggota`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for mt_petugas
@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS `mt_petugas`;
 CREATE TABLE `mt_petugas`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `id_anggota` int(0) NULL DEFAULT NULL,
-  `nip` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `nip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `tmt` datetime(0) NULL DEFAULT NULL,
   `status` int(0) NULL DEFAULT 1,
   `created_at` datetime(0) NULL DEFAULT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE `mt_petugas`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `id_anggota`(`id_anggota`) USING BTREE,
   CONSTRAINT `mt_petugas_ibfk_1` FOREIGN KEY (`id_anggota`) REFERENCES `mt_anggota` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for mt_users
@@ -69,8 +69,8 @@ DROP TABLE IF EXISTS `mt_users`;
 CREATE TABLE `mt_users`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `id_anggota` int(0) NULL DEFAULT NULL,
-  `username` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `status` int(0) NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `created_by` int(0) NULL DEFAULT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE `mt_users`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `id_anggota`(`id_anggota`) USING BTREE,
   CONSTRAINT `mt_users_ibfk_1` FOREIGN KEY (`id_anggota`) REFERENCES `mt_anggota` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tc_bayar
@@ -104,7 +104,7 @@ CREATE TABLE `tc_bayar`  (
   `deleted_id` int(0) NULL DEFAULT NULL,
   `tgl_pembayaran` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tc_pinjam
@@ -129,7 +129,7 @@ CREATE TABLE `tc_pinjam`  (
   `total_cicilan` decimal(10, 0) NULL DEFAULT NULL,
   `total_peminjaman` decimal(10, 0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tc_simpan
@@ -148,7 +148,7 @@ CREATE TABLE `tc_simpan`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   `deleted_id` int(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- View structure for v_bayar
