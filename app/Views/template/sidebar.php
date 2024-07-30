@@ -42,8 +42,12 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?php echo base_url('pinjam'); ?>">Pengajuan</a>
-                <a class="collapse-item" href="<?php echo base_url('bayar'); ?>">Pembayaran</a>
+                <?php if (session()->get('logged_in') == TRUE && session()->get('admin') == TRUE) { ?>
+                    <a class="collapse-item" href="<?php echo base_url('pinjam'); ?>">Pengajuan</a>
+                <?php } else { ?>
+                    <a class="collapse-item" href="<?php echo base_url('pinjam'); ?>">Pengajuan</a>
+                    <a class="collapse-item" href="<?php echo base_url('bayar'); ?>">Pembayaran</a>
+                <?php } ?>
             </div>
         </div>
     </li>
@@ -53,8 +57,7 @@
 
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <?php if (session()->get('logged_in') == TRUE && session()->get('admin') == TRUE) {
-    ?>
+    <?php if (session()->get('logged_in') == TRUE && session()->get('admin') == TRUE) { ?>
 
         <!-- Heading -->
         <div class="sidebar-heading">
