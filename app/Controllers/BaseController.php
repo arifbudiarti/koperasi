@@ -33,9 +33,9 @@ abstract class BaseController extends Controller
      * class instantiation. These helpers will be available
      * to all other controllers that extend BaseController.
      *
-     * @var array
+     * @var list<string>
      */
-    protected $helpers = [];
+    protected $helpers = ['form', 'url'];
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -50,8 +50,15 @@ abstract class BaseController extends Controller
     {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
+        date_default_timezone_set('Asia/Jakarta'); // Added user timezone
 
         // Preload any models, libraries, etc, here.
+        $this->userModels = new \App\Models\UserModels();
+        $this->anggotaModels = new \App\Models\AnggotaModels();
+        $this->pegawaiModels = new \App\Models\PegawaiModels();
+        $this->simpanModels = new \App\Models\SimpanModels();
+        $this->pinjamModels = new \App\Models\PinjamModels();
+        $this->angsuranModels = new \App\Models\AngsuranModels();
 
         // E.g.: $this->session = \Config\Services::session();
     }
