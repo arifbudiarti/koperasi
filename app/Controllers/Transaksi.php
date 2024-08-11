@@ -125,13 +125,13 @@ class Transaksi extends BaseController
     {
         $data['title'] = 'Transaksi - Peminjaman';
         if (session()->get('logged_in') == TRUE && session()->get('admin') == TRUE) {
-            $data['dashboard'] = $this->db1->query("SELECT SUM(case when MONTH(tgl_peminjaman)=MONTH(CURDATE()) AND deleted_at IS NULL then total_peminjaman else 0 end) as pinjam_bulan, SUM(case when deleted_at IS NULL then total_peminjaman else 0 end) as pinjam_total FROM tc_pinjam")->getResultArray();
+            $data['dashboard'] = $this->db1->query("SELECT SUM(case when MONTH(tgl_peminjaman)=MONTH(CURDATE()) AND deleted_at IS NULL AND status=1 then total_peminjaman else 0 end) as pinjam_bulan, SUM(case when deleted_at IS NULL AND status=1 then total_peminjaman else 0 end) as pinjam_total FROM tc_pinjam")->getResultArray();
             $data['pinjam'] = $this->db1->query("SELECT * FROM v_pinjam")->getResult();
         } else {
             $id_anggota = session()->get('idanggota');
             // print_r($id_anggota);
             // die();
-            $data['dashboard'] = $this->db1->query("SELECT SUM(case when MONTH(tgl_peminjaman)=MONTH(CURDATE()) AND deleted_at IS NULL then total_peminjaman else 0 end) as pinjam_bulan, SUM(case when deleted_at IS NULL then total_peminjaman else 0 end) as pinjam_total FROM tc_pinjam WHERE id_anggota=" . $id_anggota)->getResultArray();
+            $data['dashboard'] = $this->db1->query("SELECT SUM(case when MONTH(tgl_peminjaman)=MONTH(CURDATE()) AND deleted_at IS NULL AND status=1 then total_peminjaman else 0 end) as pinjam_bulan, SUM(case when deleted_at IS NULL AND status=1 then total_peminjaman else 0 end) as pinjam_total FROM tc_pinjam WHERE id_anggota=" . $id_anggota)->getResultArray();
             $data['pinjam'] = $this->db1->query("SELECT * FROM v_pinjam WHERE id_anggota=" . $id_anggota)->getResult();
         }
         return view('pages/pinjam', $data);
@@ -140,7 +140,7 @@ class Transaksi extends BaseController
     public function pinjamdetail($id)
     {
         $data['title'] = 'Transaksi - Simpan';
-        $data['dashboard'] = $this->db1->query("SELECT SUM(case when MONTH(tgl_peminjaman)=MONTH(CURDATE()) AND deleted_at IS NULL then total_peminjaman else 0 end) as pinjam_bulan, SUM(case when deleted_at IS NULL then total_peminjaman else 0 end) as pinjam_total FROM tc_pinjam WHERE id_anggota=" . $id)->getResultArray();
+        $data['dashboard'] = $this->db1->query("SELECT SUM(case when MONTH(tgl_peminjaman)=MONTH(CURDATE()) AND deleted_at IS NULL AND status=1 then total_peminjaman else 0 end) as pinjam_bulan, SUM(case when deleted_at IS NULL AND status=1  then total_peminjaman else 0 end) as pinjam_total FROM tc_pinjam WHERE id_anggota=" . $id)->getResultArray();
         $data['simpan'] = $this->pinjamModels->where('status', 1)->where('id_anggota', $id)->findAll();
 
         if (!$data['simpan']) {
